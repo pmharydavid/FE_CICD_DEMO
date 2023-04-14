@@ -36,4 +36,6 @@ jobs:
           username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
           key: ${{ secrets.DEPLOY_SERVER_SSH_KEY }}
           scripts: |
+            mkdir -p /home/ubuntu/deploy/${{ github.run_id }}
+            cd /home/ubuntu/deploy/${{ github.run_id }} && git clone https://github.com/pmharydavid/FE_CICD_DEMO
             
