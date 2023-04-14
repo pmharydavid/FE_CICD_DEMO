@@ -38,4 +38,7 @@ jobs:
           scripts: |
             mkdir -p /home/ubuntu/deploy/${{ github.run_id }}
             cd /home/ubuntu/deploy/${{ github.run_id }} && git clone https://github.com/pmharydavid/FE_CICD_DEMO
-            
+            cd /home/ubuntu/deploy/${{ github.run_id }}/FE_CICD_DEMO && docker build . -t pmharydavid/cicd_demo:${{ github.run_id }}
+            docker rm -f $(docker ps -q -f name=myapp|awk '{print $1}')
+            docker run -dit --name myapp-${{ github.run_id }} -p 80:3000 pmharydavid/cicd_demo:${{ github.run_id }}
+            rm -fr /home/ubuntu/deploy/*
