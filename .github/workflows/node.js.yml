@@ -24,3 +24,16 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run test
+    
+  my_deploy:
+    runs-on: ubuntu-latest
+    needs: my_test
+    steps:
+      - name: Kitelepites
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.DEPLOY_SERVER_IP }}
+          username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
+          key: ${{ secrets.DEPLOY_SERVER_SSH_KEY }}
+          scripts: |
+            
